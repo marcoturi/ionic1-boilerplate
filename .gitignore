@@ -12,7 +12,8 @@
 /plugins/
 /www/lib/
 /dist/
-/www/js/core/config/config.js
+.idea/
+#/www/js/core/config/config.js
 
 # Vagrant - docker
 .vagrant/
