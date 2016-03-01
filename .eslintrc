@@ -1,0 +1,32 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "strict": 0,
+    "comma-dangle": [
+      2,
+      "never"
+    ],
+    "eol-last": 1,
+    // enforce newline at the end of file, with no multiple empty lines
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ],
+    "angular/window-service": 0,
+    "indent": [
+      2, 4
+    ]
+  },
+  "globals": {
+    "cordova": true
+  },
+  "extends": [
+    "angular",
+    "airbnb/base"
+  ]
+}
