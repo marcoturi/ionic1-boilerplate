@@ -68,7 +68,7 @@ gulp.task('fonts', () => {
  *
  * @return {Stream}
  */
-gulp.task('compile', ['sass', 'scripts'], () => {
+gulp.task('compile', ['sass', 'scripts', 'templates'], () => {
     return gulp.src(path.app.html)
         .pipe(inject(gulp.src(`${path.tmp.scripts}${path.fileNames.jsBundle}.js`, {read: false}), {
             starttag: '<!-- inject:build:js -->',
