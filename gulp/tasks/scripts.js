@@ -6,19 +6,33 @@
 'use strict';
 
 import gulp from 'gulp';
-import jshint from 'gulp-jshint';
+import util from 'gulp-util';
+import sourcemaps from 'gulp-sourcemaps';
+import babel from 'gulp-babel';
+import concat from 'gulp-concat';
+import ngAnnotate from 'gulp-ng-annotate';
+import gulpif from 'gulp-if';
+import uglify from 'gulp-uglify';
+import plumber from 'gulp-plumber';
 import path from '../paths';
+const argv = util.env;
 
-/**
- * The 'jshint' task defines the rules of our hinter as well as which files
- * we should check. It helps to detect errors and potential problems in our
- * JavaScript code.
- *
- * @return {Stream}
- */
-gulp.task('jshint', () => {
-    return gulp.src(path.app.scripts.concat(path.gulpfile))
-        .pipe(jshint(`${path.root}/.jshintrc`))
-        .pipe(jshint.reporter('jshint-stylish'))
-        .pipe(jshint.reporter('fail'));
+// scripts - clean dist dir then annotate, uglify, concat
+gulp.task('scripts',  () => {
+
+    return gulp.src(path.app.scripts)
+        .pipe(plumber())
+        .pipe(sourcemaps.init())
+        .pipe(babel())
+        .pipe(concat(`${path.fileNames.jsBundle}.js`))
+        .pipe(ngAnnotate({
+            add: true,
+            single_quotes: true
+        }))
+        .pipe(gulpif(argv.prod, uglify()))
+        .pipe(sourcemaps.write('.', {
+            includeContent: false,
+            sourceRoot: '../../js'
+        }))
+        .pipe(gulp.dest(path.tmp.scripts));
 });

@@ -4,9 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
-
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <!-- build:css(.tmp) css/ionic.app.css -->
+    <link href="../src/lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="../src/css/style.css" rel="stylesheet">
+    <!-- endbuild -->
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -19,7 +20,9 @@
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
-    <script src="js/app.js"></script>
+    <!-- build:js(.) js/app.bundle.js -->
+    <!-- inject:build:js --><!-- endinject -->
+    <!-- endbuild -->
   </head>
   <body ng-app="starter">
 

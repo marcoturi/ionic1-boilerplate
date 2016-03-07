@@ -11,12 +11,13 @@ import sass from 'gulp-sass';
 //import concat from 'gulp-concat';
 //import minifyCss from 'gulp-minify-css';
 //import rename from 'gulp-rename';
+import changed from 'gulp-changed';
 import sourcemaps from 'gulp-sourcemaps';
 import browserSync from 'browser-sync';
 import autoprefixer from 'gulp-autoprefixer';
 import path from '../paths';
 
-const argv = util.env;
+//const argv = util.env;
 //const ENV = !!argv.env ? argv.env.toLowerCase() : 'DEV';
 
 /**
@@ -25,8 +26,8 @@ const argv = util.env;
  * @return {Stream}
  */
 
-gulp.task('sass', (done) => {
-    gulp.src(path.app.ionicStyle)
+gulp.task('sass', () => {
+    return gulp.src(path.app.ionicStyle)
         .pipe(changed(path.tmp.styles, {extension: '.scss'}))
         .pipe(sourcemaps.init())
         .pipe(sass())
@@ -40,6 +41,5 @@ gulp.task('sass', (done) => {
         //}))
         //.pipe(rename({ extname: '.min.css' }))
         //.pipe(gulp.dest(path.tmp.styles))
-        .pipe(browserSync.reload({stream:true}))
-        .on('end', done);
+        .pipe(browserSync.reload({stream:true}));
 });

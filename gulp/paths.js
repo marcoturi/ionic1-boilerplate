@@ -8,7 +8,7 @@ const paths = {
     /**
      * The 'gulpfile' file is where our run tasks are hold.
      */
-    gulpfile:   [`${root}/gulpfile.js`, `${root}/gulp/**/*.js`],
+    gulpfile: [`${root}/gulpfile.js`, `${root}/gulp/**/*.js`],
     /**
      * This is a collection of file patterns that refer to our app code (the
      * stuff in `src/`). These file paths are used in the configuration of
@@ -24,19 +24,23 @@ const paths = {
      * - 'config'       contains Angular app config files
      */
     app: {
-        basePath:       `${root}/src/`,
-        fonts:          `${root}/src/font/**/*.{eot,svg,ttf,woff,woff2}`,
-        styles:         `${root}/src/css/**/*.scss`,
-        ionicStyle:     `${root}/scss/ionic.app.scss`,
-        images:         `${root}/src/img/**/*.{png,gif,jpg,jpeg}`,
+        basePath: `${root}/src/`,
+        fonts: `${root}/src/font/**/*.{eot,svg,ttf,woff,woff2}`,
+        styles: `${root}/src/css/**/*.scss`,
+        ionicStyle: `${root}/scss/ionic.app.scss`,
+        images: `${root}/src/img/**/*.{png,gif,jpg,jpeg}`,
         config: {
-            basePath:   `${root}/src/js/core/config/`,
+            basePath: `${root}/src/js/core/config/`,
             conditions: `${root}/src/js/core/config/env.conditions.js`
         },
-        scripts:        `${root}/src/js/**/*.js`,
-        html:           `${root}/src/index.html`,
-        templates:      `${root}/src/js/**/*.html`,
-        json:           `${root}/src/js/**/*.json`
+        scripts: [
+            `${root}/src/js/**/*module*.js`,
+            `${root}/src/js/**/*.js`,
+            `${root}/src/js/**/*.spec.js`
+        ],
+        html: `${root}/src/index.html`,
+        templates: `${root}/src/js/**/*.html`,
+        json: `${root}/src/js/**/*.json`
     },
     /**
      * The 'tmp' folder is where our html templates are compiled to JavaScript during
@@ -44,9 +48,9 @@ const paths = {
      * copy to 'dist' folder.
      */
     tmp: {
-        basePath:       `${root}/.tmp/`,
-        styles:         `${root}/.tmp/styles/`,
-        scripts:        `${root}/.tmp/scripts/`
+        basePath: `${root}/.tmp/`,
+        styles: `${root}/.tmp/styles/`,
+        scripts: `${root}/.tmp/scripts/`
     },
     /**
      * The 'build' folder is where our app resides once it's
@@ -56,15 +60,23 @@ const paths = {
      * - 'docs'         application documentation
      */
     build: {
-        basePath:       `${root}/www/`,
+        basePath: `${root}/www/`,
         dist: {
-            basePath:   `${root}/www/`,
-            fonts:      `${root}/www/font/`,
-            images:     `${root}/www/img/`,
-            styles:     `${root}/www/css/`,
-            scripts:    `${root}/www/js/`
+            basePath: `${root}/www/`,
+            fonts: `${root}/www/font/`,
+            images: `${root}/www/img/`,
+            styles: `${root}/www/css/`,
+            scripts: `${root}/www/js/`
         },
-        docs:           `${root}/www/docs/`
+        docs: `${root}/www/docs/`
+    },
+
+    fileNames: {
+        jsBundle: `app.bundle`,
+        jsBundleTest: `app.bundle.test`,
+        tplBundle: `tpl.bundle`,
+        appcss: `app.css`,
+        ionicAppCss: `ionic.app`
     }
 };
 

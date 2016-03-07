@@ -24,4 +24,4 @@ const onRun = ($ionicPlatform) => {
         }
     });
 };
-angular.module('starter', ['ionic']).run(onRun);
+angular.module('app').run(onRun);

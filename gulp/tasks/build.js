@@ -11,7 +11,6 @@ import usemin from 'gulp-usemin';
 import inject from 'gulp-inject';
 import bytediff from 'gulp-bytediff';
 import minifyCss from 'gulp-minify-css';
-import minifyHtml from 'gulp-minify-html';
 import runSequence from 'run-sequence';
 import path from '../paths';
 //import {BANNER, CDN_URL, GH_PAGES_BASE_URL} from '../const';
@@ -21,29 +20,7 @@ import path from '../paths';
 //=============================================
 const LOG = util.log;
 const COLORS = util.colors;
-
-/**
- * Format a number as a percentage
- * @param  {Number} num       Number to format as a percent
- * @param  {Number} precision Precision of the decimal
- * @return {String}           Formatted perentage
- */
-function formatPercent(num, precision){
-    return (num * 100).toFixed(precision);
-}
-
-/**
- * Formatter for bytediff to display the size changes after processing
- * @param  {Object} data - byte data
- * @return {String}      Difference in bytes, formatted
- */
-function bytediffFormatter(data) {
-    const difference = (data.savings > 0) ? ' smaller.' : ' larger.';
-    return COLORS.yellow(data.fileName + ' went from ' +
-        (data.startSize / 1000).toFixed(2) + ' kB to ' +
-        (data.endSize / 1000).toFixed(2) + ' kB and is ' +
-        formatPercent(1 - data.percent, 2) + '%' + difference);
-}
+const argv = util.env;
 
 //=============================================
 //                  TASKS
@@ -61,15 +38,23 @@ gulp.task('clean', (cb) => {
 });
 
 /**
- * The 'copy' task just copies files from A to B. We use it here
- * to copy our files that haven't been copied by other tasks
- * e.g. (favicon, etc.) into the `build/dist` directory.
+ * The 'copy' task for images
  *
  * @return {Stream}
  */
-gulp.task('extras', () => {
-    return gulp.src([path.app.fonts, path.app.images])
-        .pipe(gulp.dest(path.build.dist.basePath));
+gulp.task('images', () => {
+    return gulp.src(path.app.images)
+        .pipe(gulp.dest(path.build.dist.images));
+});
+
+/**
+ * The 'copy' task for fonts
+ *
+ * @return {Stream}
+ */
+gulp.task('fonts', () => {
+    return gulp.src(path.app.fonts)
+        .pipe(gulp.dest(path.build.dist.fonts));
 });
 
 
@@ -83,32 +68,21 @@ gulp.task('extras', () => {
  *
  * @return {Stream}
  */
-gulp.task('compile', [ 'sass', 'scripts'], () => {
-
+gulp.task('compile', ['sass', 'scripts'], () => {
     return gulp.src(path.app.html)
-        .pipe(inject(gulp.src(path.tmp.scripts + 'build.js', {read: false}), {
+        .pipe(inject(gulp.src(`${path.tmp.scripts}${path.fileNames.jsBundle}.js`, {read: false}), {
             starttag: '<!-- inject:build:js -->',
             ignorePath: [path.app.basePath]
         }))
         .pipe(usemin({
-            css:        [
-                bytediff.start(),
-                minifyCss({keepSpecialComments: 0}),
-                bytediff.stop(bytediffFormatter),
-                rev()
+            css: [
+                gulpif(argv.prod, minifyCss({keepSpecialComments: 0})),
+                gulpif(argv.prod, rev())
             ],
-            /*jshint camelcase: false */
-            js:         [
-                bytediff.start(),
-                uglify(),
-                bytediff.stop(bytediffFormatter),
-                rev()
+            js: [
+                gulpif(argv.prod, rev())
             ],
-            html:       [
-                bytediff.start(),
-                minifyHtml({empty:true}),
-                bytediff.stop(bytediffFormatter)
-            ]
+            html: []
         }))
         .pipe(gulp.dest(path.build.dist.basePath))
         .pipe(size({title: 'compile', showFiles: true}));
@@ -123,7 +97,7 @@ gulp.task('compile', [ 'sass', 'scripts'], () => {
 gulp.task('build', (cb) => {
     runSequence(
         ['clean'],
-        ['compile', 'extras'],
+        ['compile', 'images', 'fonts'],
         cb
     );
 });

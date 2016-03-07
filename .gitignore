@@ -10,9 +10,10 @@
 /resources/
 /platforms/
 /plugins/
-/www/lib/
+/www/
 /dist/
 .idea/
+.tmp/
 #/www/js/core/config/config.js
 
 # Vagrant - docker

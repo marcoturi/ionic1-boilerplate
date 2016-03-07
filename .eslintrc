@@ -20,7 +20,8 @@
     "angular/window-service": 0,
     "indent": [
       2, 4
-    ]
+    ],
+    "angular/controller-name": [2,"/[A-Z].*Ctrl/"]
   },
   "globals": {
     "cordova": true
