@@ -28,7 +28,7 @@ gulp.task('sass', () => {
         .pipe(sass())
         .on('error', sass.logError)
         .pipe(autoprefixer('last 2 version'))
-        .pipe(sourcemaps.write('../maps'))
+        .pipe(sourcemaps.write('../styles'))
         .pipe(gulp.dest(path.tmp.styles))
         //todo:
         //.pipe(minifyCss({

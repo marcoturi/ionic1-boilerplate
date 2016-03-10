@@ -57,6 +57,16 @@ gulp.task('fonts', () => {
         .pipe(gulp.dest(path.build.dist.fonts));
 });
 
+/**
+ * The 'copy' task for maps
+ *
+ * @return {Stream}
+ */
+gulp.task('maps', () => {
+    return gulp.src(`${path.tmp.scripts}${path.fileNames.jsBundle}.js.map`)
+        .pipe(gulp.dest(path.build.dist.scripts));
+});
+
 
 /**
  * The 'compile' task compile all js, css and html files.
@@ -70,18 +80,26 @@ gulp.task('fonts', () => {
  */
 gulp.task('compile', ['sass', 'scripts', 'templates'], () => {
     return gulp.src(path.app.html)
-        .pipe(inject(gulp.src(`${path.tmp.scripts}${path.fileNames.jsBundle}.js`, {read: false}), {
-            starttag: '<!-- inject:build:js -->',
-            ignorePath: [path.app.basePath]
-        }))
+        //.pipe(inject(gulp.src(`${path.tmp.scripts}${path.fileNames.jsBundle}.js`, {read: false}), {
+        //    starttag: '<!-- inject:build:js -->',
+        //    ignorePath: [path.app.basePath]
+        //}))
+        //.pipe(inject(gulp.src(`${path.tmp.scripts}${path.fileNames.tplBundle}.js`, {read: false}), {
+        //    starttag: '<!-- inject:build:tpl -->',
+        //    ignorePath: [path.app.basePath]
+        //}))
         .pipe(usemin({
             css: [
                 gulpif(argv.prod, minifyCss({keepSpecialComments: 0})),
                 gulpif(argv.prod, rev())
             ],
-            js: [
+            jsBundle: [
                 gulpif(argv.prod, rev())
             ],
+            jsTemplate: [
+                gulpif(argv.prod, rev())
+            ],
+            jsVendor: [],
             html: []
         }))
         .pipe(gulp.dest(path.build.dist.basePath))
@@ -98,6 +116,7 @@ gulp.task('build', (cb) => {
     runSequence(
         ['clean'],
         ['compile', 'images', 'fonts'],
+        ['maps'],
         cb
     );
 });

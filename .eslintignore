@@ -4,4 +4,4 @@ hooks/
 www/
 src/lib/**/*
 gulpfile.js
-gulp/
+gulp/**/*

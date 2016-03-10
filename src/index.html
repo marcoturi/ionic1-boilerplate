@@ -9,21 +9,19 @@
     <link href="../src/css/style.css" rel="stylesheet">
     <!-- endbuild -->
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <!-- build:jsVendor(.tmp) js/vendor.bundle.js -->
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+    <!-- endbuild -->
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
-    <!-- your app's js -->
-    <!-- build:js(.) js/app.bundle.js -->
-    <!-- inject:build:js --><!-- endinject -->
+    <!-- build:jsBundle(.tmp) js/app.bundle.js -->
+    <script src="../.tmp/scripts/app.bundle.js"></script>
     <!-- endbuild -->
-    <!-- build:js(.tmp) scripts/tpl.bundle.js -->
+
+    <!-- build:jsTemplate(.tmp) js/tpl.bundle.js -->
+    <script src="../.tmp/scripts/tpl.bundle.js"></script>
     <!-- endbuild -->
   </head>
   <body ng-app="starter">
