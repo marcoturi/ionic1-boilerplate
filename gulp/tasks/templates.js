@@ -12,10 +12,20 @@ gulp.task('templates', () => {
             empty: true
         }))
         .pipe(templateCache({
-            module: 'app.core.templates',
+            module: 'app.templates',
             standalone: true,
             root: 'js'
         }))
         .pipe(rename(path.fileNames.tplBundle + '.js'))
-        .pipe(gulp.dest(path.tmp.scripts));
+        .pipe(gulp.dest(path.tmp.templates));
+});
+
+/**
+ * The 'copy' task for templates
+ *
+ * @return {Stream}
+ */
+gulp.task('templates-cp', () => {
+    return gulp.src(`${path.tmp.templates}${path.fileNames.tplBundle}.js`)
+        .pipe(gulp.dest(path.build.dist.templates));
 });

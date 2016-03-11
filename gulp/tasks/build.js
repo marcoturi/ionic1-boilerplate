@@ -78,16 +78,13 @@ gulp.task('maps', () => {
  *
  * @return {Stream}
  */
-gulp.task('compile', ['sass', 'scripts', 'templates'], () => {
+gulp.task('html', () => {
     return gulp.src(path.app.html)
-        //.pipe(inject(gulp.src(`${path.tmp.scripts}${path.fileNames.jsBundle}.js`, {read: false}), {
-        //    starttag: '<!-- inject:build:js -->',
-        //    ignorePath: [path.app.basePath]
-        //}))
-        //.pipe(inject(gulp.src(`${path.tmp.scripts}${path.fileNames.tplBundle}.js`, {read: false}), {
-        //    starttag: '<!-- inject:build:tpl -->',
-        //    ignorePath: [path.app.basePath]
-        //}))
+        .pipe(inject(gulp.src(path.build.dist.scriptsBuildOrder, {read: false}), {
+            starttag: '<!-- inject:build:js -->',
+            ignorePath: ['www'],
+            addRootSlash: false
+        }))
         .pipe(usemin({
             css: [
                 gulpif(argv.prod, minifyCss({keepSpecialComments: 0})),
@@ -115,7 +112,8 @@ gulp.task('compile', ['sass', 'scripts', 'templates'], () => {
 gulp.task('build', (cb) => {
     runSequence(
         ['clean'],
-        ['compile', 'images', 'fonts'],
+        ['sass', 'scripts', 'templates'],
+        ['html', 'images', 'fonts'],
         ['maps'],
         cb
     );

@@ -5,23 +5,25 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
     <!-- build:css(.tmp) css/ionic.app.css -->
-    <link href="../src/lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="../.tmp/styles/ionic.app.css" rel="stylesheet">
     <link href="../src/css/style.css" rel="stylesheet">
     <!-- endbuild -->
 
-    <!-- build:jsVendor(.tmp) js/vendor.bundle.js -->
+    <!-- build:jsVendor(.tmp) vendors/vendor.bundle.js -->
     <script src="../src/lib/ionic/js/ionic.bundle.min.js"></script>
     <!-- endbuild -->
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
-    <!-- build:jsBundle(.tmp) js/app.bundle.js -->
-    <script src="../.tmp/scripts/app.bundle.js"></script>
-    <!-- endbuild -->
 
-    <!-- build:jsTemplate(.tmp) js/tpl.bundle.js -->
-    <script src="../.tmp/scripts/tpl.bundle.js"></script>
+    <!-- inject:build:js --><!-- endinject -->
+
+
+    <!--<script src="../.tmp/scripts/app.bundle.js"></script>-->
+
+    <!-- build:jsTemplate(.tmp) templates/tpl.bundle.js -->
+    <script src="../.tmp/templates/tpl.bundle.js"></script>
     <!-- endbuild -->
   </head>
   <body ng-app="app" ng-strict-di="">

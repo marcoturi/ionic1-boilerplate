@@ -38,3 +38,13 @@ gulp.task('sass', () => {
         //.pipe(gulp.dest(path.tmp.styles))
         .pipe(browserSync.reload({stream:true}));
 });
+
+/**
+ * The 'copy' task for maps
+ *
+ * @return {Stream}
+ */
+gulp.task('sass-cp', () => {
+    return gulp.src(`${path.tmp.styles}${path.fileNames.css}.js`)
+        .pipe(gulp.dest(path.build.dist.styles));
+});

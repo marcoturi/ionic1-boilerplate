@@ -6,7 +6,6 @@
      * @name app.core
      */
     angular.module('app.core', [
-        'app.core.templates'
     ]);
 
 })();

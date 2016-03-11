@@ -107,20 +107,7 @@ function startBrowserSync(baseDir, files, browser) {
  * The 'startBrowserSync' task start BrowserSync and open the browser.
  */
 gulp.task('startBrowserSync', () => {
-    let startBrowserSyncTask;
-
-    switch(ENV) {
-        case 'dev':
-        case 'test':
-            startBrowserSyncTask = startBrowserSync(['.tmp', 'src', './' ]);
-            break;
-        case 'prod':
-        case TEST_OPTIMIZE:
-            //startBrowserSyncTask = startBrowserSync([path.build.dist.basePath]);
-            break;
-    }
-
-    return startBrowserSyncTask;
+    return startBrowserSync([path.build.dist.basePath]);
 });
 
 /**
@@ -132,7 +119,7 @@ gulp.task('serve', () => {
     switch(ENV) {
         case 'dev':
         case 'test':
-            serveTasks = ['sass', 'watch'];
+            serveTasks = ['build', 'watch'];
             break;
         case 'prod':
         case TEST_OPTIMIZE:
@@ -142,7 +129,8 @@ gulp.task('serve', () => {
 
     // this will first run all serveTasks and then startBrowserSync task
     runSequence(
-        serveTasks,
+        ['build'],
+        ['watch'],
         ['startBrowserSync']
     );
 });

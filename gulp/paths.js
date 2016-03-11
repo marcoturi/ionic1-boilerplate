@@ -33,6 +33,7 @@ const paths = {
             basePath: `${root}/src/js/core/config/`,
             conditions: `${root}/src/js/core/config/env.conditions.js`
         },
+        scriptBasePath: `${root}/src/js`,
         scripts: [
             `${root}/src/js/**/*module*.js`,
             `${root}/src/js/**/*.js`,
@@ -50,7 +51,8 @@ const paths = {
     tmp: {
         basePath: `${root}/.tmp/`,
         styles: `${root}/.tmp/styles/`,
-        scripts: `${root}/.tmp/scripts/`
+        scripts: `${root}/.tmp/scripts/`,
+        templates: `${root}/.tmp/templates/`
     },
     /**
      * The 'build' folder is where our app resides once it's
@@ -66,7 +68,14 @@ const paths = {
             fonts: `${root}/www/font/`,
             images: `${root}/www/img/`,
             styles: `${root}/www/css/`,
-            scripts: `${root}/www/js/`
+            scripts: `${root}/www/js/`,
+            scriptsBuildOrder: [
+                `${root}/www/js/**/*module*.js`,
+                `${root}/www/js/**/*.js`,
+                `!${root}/www/js/**/*.spec.js`
+
+            ],
+            templates: `${root}/www/js/templates/`
         },
         docs: `${root}/www/docs/`
     },
@@ -74,9 +83,7 @@ const paths = {
     fileNames: {
         jsBundle: `app.bundle`,
         jsBundleTest: `app.bundle.test`,
-        tplBundle: `tpl.bundle`,
-        appcss: `app.css`,
-        ionicAppCss: `ionic.app`
+        tplBundle: `tpl.bundle`
     }
 };
 

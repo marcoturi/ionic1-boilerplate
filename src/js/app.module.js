@@ -10,5 +10,6 @@
     angular.module('app', [
         'app.vendors',
         'app.core',
+        'app.templates',
         'app.home']);
 })();

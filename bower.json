@@ -1,5 +1,5 @@
 {
-  "name": "HelloIonic",
+  "name": "ionic-es6-boilerplate",
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.2.4"
