@@ -8,6 +8,7 @@
      * The main app module
      */
     angular.module('app', [
-        'app.external',
+        'app.vendors',
+        'app.core',
         'app.home']);
 })();

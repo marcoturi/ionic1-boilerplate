@@ -3,10 +3,10 @@
 
     /**
      * @ngdoc overview
-     * @name app.external
+     * @name app.vendors
      * @description
-     * The main app module
+     * Vendors module
      */
-    angular.module('app.external', [
+    angular.module('app.vendors', [
         'ionic']);
 })();
