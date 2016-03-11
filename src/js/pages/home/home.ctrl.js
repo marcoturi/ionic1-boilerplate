@@ -12,7 +12,7 @@
 
         constructor() {
             'ngInject';
-            console.log('a13555dd44555');
+            this.title = 'Mami 3';
         }
     }
 

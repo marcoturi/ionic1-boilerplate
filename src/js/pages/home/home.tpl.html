@@ -3,6 +3,10 @@
         Home
     </ion-header-bar>
     <ion-content overflow-scroll="false">
-        Welcome Home 235
+        Welcome on {{vm.title}}!!!
+        <ion-input class="item item-input">
+            <ion-label>Prova</ion-label>
+            <input type="text" ng-model="vm.title" name="title">
+        </ion-input>
     </ion-content>
 </ion-view>

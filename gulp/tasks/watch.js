@@ -46,7 +46,7 @@ gulp.task('watch', () => {
 
     // Watch tpl files
     gulp.watch(path.app.templates, () => {
-        runSequence('templates', 'templates-cp', 'bs-reload');
+        return runSequence('templates', 'templates-cp', 'bs-reload');
     });
 
     // Watch html files

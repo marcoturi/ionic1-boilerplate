@@ -3,12 +3,9 @@
 import gulp from 'gulp';
 import util from 'gulp-util';
 import inject from 'gulp-inject';
-//import httpProxy from 'http-proxy';
-//import modRewrite  from 'connect-modrewrite';
 import browserSync from 'browser-sync';
 import runSequence from 'run-sequence';
 import path from '../paths';
-//import {API_URL} from '../const';
 
 const argv = util.env;
 const LOG = util.log;
@@ -19,7 +16,6 @@ const COLORS = util.colors;
 //=============================================
 
 let ENV = !!argv.env ? argv.env.toLowerCase() : 'dev';
-let OPTIMIZE = !!argv.optimize ? argv.optimize.toLowerCase() : 'false';
 let OPEN_BROWSER = !!argv.open ? argv.open.toLowerCase() : 'true';
 
 if(!OPEN_BROWSER.match(new RegExp(/true|false/))) {
@@ -29,40 +25,11 @@ if(!OPEN_BROWSER.match(new RegExp(/true|false/))) {
     OPEN_BROWSER = OPEN_BROWSER === 'true';
 }
 
-if(!OPTIMIZE.match(new RegExp(/true|false/))) {
-    LOG(COLORS.red(`Error: The argument 'optimize' has incorrect value ${OPEN_BROWSER}! Usage: --optimize=(true|false)`));
-    process.exit(1);
-} else if(OPTIMIZE === 'true') {
-    ENV = TEST_OPTIMIZE;
-}
-
 if(!ENV.match(new RegExp(/prod|dev|test/))) {
     LOG(COLORS.red(`Error: The argument 'env' has incorrect value ${ENV}! Usage: --env=(dev|test|prod)`));
     process.exit(1);
 }
 
-//=============================================
-//           PROXY CONFIGURATION
-//=============================================
-
-// This configuration allow you to configure browser sync to proxy your backend
-//const proxyTarget = API_URL; // The location of your backend API
-//const proxyApiPrefix = 'api/'; // The element in the URL which differentiate between API request and static file request
-
-//let proxy = httpProxy.createProxyServer({
-//    target: proxyTarget
-//});
-
-//function proxyMiddleware(req, res, next) {
-//    if (req.url.includes(proxyApiPrefix)) {
-//        proxy.web(req, res, (err) => {
-//            // if there is any proxy error return the error
-//            next(err);
-//        });
-//    } else {
-//        next();
-//    }
-//}
 
 function startBrowserSync(baseDir, files, browser) {
     browser = browser === undefined ? 'default' : browser;
@@ -122,7 +89,6 @@ gulp.task('serve', () => {
             serveTasks = ['build', 'watch'];
             break;
         case 'prod':
-        case TEST_OPTIMIZE:
             serveTasks = [ 'build'];
             break;
     }

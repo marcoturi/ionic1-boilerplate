@@ -17,9 +17,15 @@
     "es6"
   ],
   "scripts": {
-    "lint": "./node_modules/.bin/eslint --cache ."
+    "lint": "./node_modules/.bin/eslint --cache .",
+    "start": "gulp serve --env=dev --api=prod",
+    "start-stage":  "gulp serve --env=dev --api=stage",
+    "dev": "gulp build --env=dev --api=prod",
+    "dev-stage": "gulp build --env=dev --api=stage",
+    "release": "gulp build --env=prod --api=prod",
+    "ios": "bash -c 'npm run start' && bash -c 'ionic run ios -l'"
   },
-  "pre-commit": [],
+  "pre-commit": [ "lint"],
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-eslint": "^5.0.0",

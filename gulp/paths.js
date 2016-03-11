@@ -75,7 +75,7 @@ const paths = {
                 `!${root}/www/js/**/*.spec.js`
 
             ],
-            templates: `${root}/www/js/templates/`
+            templates: `${root}/www/templates/`
         },
         docs: `${root}/www/docs/`
     },

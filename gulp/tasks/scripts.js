@@ -9,8 +9,18 @@ import concat from 'gulp-concat';
 import ngAnnotate from 'gulp-ng-annotate';
 import uglify from 'gulp-uglify';
 import plumber from 'gulp-plumber';
+import rev from 'gulp-rev';
 import path from '../paths';
+
 const argv = util.env;
+const LOG = util.log;
+const COLORS = util.colors;
+
+let ENV = !!argv.env ? argv.env.toLowerCase() : 'dev';
+if(!ENV.match(new RegExp(/prod|dev|test/))) {
+    LOG(COLORS.red(`Error: The argument 'env' has incorrect value ${ENV}! Usage: --env=(dev|test|prod)`));
+    process.exit(1);
+}
 
 // scripts - clean dist dir then annotate, uglify, concat
 
@@ -21,16 +31,17 @@ gulp.task('scripts',  () => {
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(babel())
-        .pipe(gulpif(argv.prod, concat(`${path.fileNames.jsBundle}.js`)))
+        .pipe(gulpif(ENV==='prod', concat(`${path.fileNames.jsBundle}.js`)))
         .pipe(ngAnnotate({
             add: true,
             single_quotes: true
         }))
-        .pipe(gulpif(argv.prod, uglify()))
+        .pipe(gulpif(ENV==='prod', uglify()))
         .pipe(sourcemaps.write('.', {
             includeContent: false,
             sourceRoot: '../../js'
         }))
+        .pipe(gulpif(ENV==='prod', rev()))
         .pipe(gulp.dest(path.build.dist.scripts));
 });
 

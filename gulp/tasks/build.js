@@ -90,9 +90,6 @@ gulp.task('html', () => {
                 gulpif(argv.prod, minifyCss({keepSpecialComments: 0})),
                 gulpif(argv.prod, rev())
             ],
-            jsBundle: [
-                gulpif(argv.prod, rev())
-            ],
             jsTemplate: [
                 gulpif(argv.prod, rev())
             ],
