@@ -21,10 +21,17 @@
     "indent": [
       2, 4
     ],
-    "angular/controller-name": [2,"/[A-Z].*Ctrl/"]
+    "angular/controller-name": [2,"/[A-Z].*Ctrl/"],
+    "angular/controller-as-vm": 0,
+    "max-len": [2, 120, 2, {
+      "ignoreUrls": true,
+      "ignoreComments": false
+    }],
+    "spaced-comment": 0
   },
   "globals": {
-    "cordova": true
+    "cordova": true,
+    "ionic": true
   },
   "extends": [
     "angular",

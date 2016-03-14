@@ -18,5 +18,4 @@
     };
 
     angular.module('app.core').constant('APP_CONST', appConst);
-
 })();

@@ -19,8 +19,6 @@
                 $ionicSideMenuDelegate.canDragContent(false);
             });
 
-
-
             /**
              * @ngdoc method
              * @name getAppVersion
@@ -35,11 +33,9 @@
                 }
                 return '0.0.0';
             };
-
         }
     }
 
     angular.module('app')
         .controller('ApplicationCtrl', ApplicationCtrl);
-
 })();

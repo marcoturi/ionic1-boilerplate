@@ -5,3 +5,5 @@ www/
 src/lib/**/*
 gulpfile.js
 gulp/**/*
+platforms/
+plugins/

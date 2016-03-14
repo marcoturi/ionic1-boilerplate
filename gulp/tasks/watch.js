@@ -9,6 +9,7 @@ import babel from 'gulp-babel';
 import ngAnnotate from 'gulp-ng-annotate';
 import plumber from 'gulp-plumber';
 import path from '../paths';
+const isWin = /^win/.test(process.platform);
 
 /**
  * The 'watch' task set up the checks to see if any of the files listed below
@@ -56,5 +57,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('bs-reload', () => {
-    browserSync.reload();
+    if(isWin) {
+        browserSync.reload();
+    }
 });

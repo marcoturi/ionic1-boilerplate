@@ -11,8 +11,7 @@
      * Router for home page
      *
      */
-    const route = /*@ngInject*/ ($stateProvider, APP_CONST) => {
-
+    const route = /* @ngInject */ ($stateProvider, APP_CONST) => {
         $stateProvider.state(APP_CONST.ROUTES.HOME, {
             url: '/',
             cache: true,
