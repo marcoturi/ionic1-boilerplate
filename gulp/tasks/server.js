@@ -1,3 +1,10 @@
+/**
+ * @author    Marco Turi <marco.turi@hotmail.it>
+ * @author    Damien Dell'Amico <damien.dellamico@saldiprivati.com>
+ * @copyright Copyright (c) 2016
+ * @license   GPL-3.0
+ */
+
 'use strict';
 
 import gulp from 'gulp';
@@ -25,6 +32,8 @@ let OPEN_BROWSER = !!argv.open ? argv.open.toLowerCase() : 'true';
 if (PLATFORM !== 'web') {
     OPEN_BROWSER = 'false';
 }
+
+LOG(COLORS.green(`OPEN BROWSER: ${OPEN_BROWSER}`));
 
 if (!OPEN_BROWSER.match(new RegExp(/true|false/))) {
     LOG(COLORS.red(`Error: The argument 'open' has incorrect value ${OPEN_BROWSER}! Usage: --open=(true|false)`));
@@ -70,27 +79,23 @@ function startBrowserSync(baseDir, files, browser) {
  *
  * @return {Stream}
  */
-//gulp.task('config', () => {
-//    const mock = !!argv.mock ? argv.mock === 'true' : ENV === 'test' || OPTIMIZE === 'true';
-//    const env = ENV === TEST_OPTIMIZE ? 'test' : ENV;
-//    return gulp.src(path.app.config.conditions)
-//        .pipe(inject(gulp.src('.'), {
-//            starttag: '/* inject:env */',
-//            endtag: '/* endinject */',
-//            transform: () => `export var mock = ${mock};\nexport var optimize = ${OPTIMIZE === 'true' || ENV=== 'prod'};\nexport var environment = '${env}';`
-//        }))
-//        .pipe(gulp.dest(path.app.config.basePath));
-//});
+gulp.task('config', () => {
+    const mock = !!argv.mock ? argv.mock === 'true' : false;
+    return gulp.src(path.app.config.conditions)
+        .pipe(inject(gulp.src('.'), {
+            starttag: '/* inject:env */',
+            endtag: '/* endinject */',
+            transform: () => `export var mock = ${mock};\nexport var optimize = ${OPTIMIZE === 'true' || ENV=== 'prod'};\nexport var environment = '${env}';`
+        }))
+        .pipe(gulp.dest(path.app.config.basePath));
+});
 
 /**
  * The 'startBrowserSync' task start BrowserSync and open the browser.
  */
 gulp.task('startBrowserSync', () => {
-    if (isWin) {
-        return startBrowserSync([path.build.dist.basePath]);
-    } else {}
+    return startBrowserSync([path.build.dist.basePath]);
 });
-
 
 /**
  * The 'ionic run {platform}' task
@@ -108,7 +113,7 @@ gulp.task('ionicserve', shell.task([
 
 
 /**
- * The 'serve' task serve the dev, test and prod environment.
+ * The 'serve' task serve the dev and prod environment.
  */
 gulp.task('serve', () => {
     let serveTasks;
@@ -123,8 +128,6 @@ gulp.task('serve', () => {
             break;
     }
 
-
-
     let shouldRun = [];
     if(isWin) {
         LOG(COLORS.green(`PLATFORM WINDOWS: RUNNING LIVERELOAD INSTEAD OF BROWSERSYNC`));
@@ -133,7 +136,6 @@ gulp.task('serve', () => {
         } else {
             shouldRun.push('ionicrun');
         }
-
     } else {
         LOG(COLORS.green(`PLATFORM UNIX: RUNNING BROWSERSYNC`));
         shouldRun.push('startBrowserSync');
@@ -142,8 +144,6 @@ gulp.task('serve', () => {
         }
     }
 
-
-    // this will first run all serveTasks and then startBrowserSync task
     runSequence(
         ['build'],
         ['watch'],

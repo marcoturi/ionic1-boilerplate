@@ -2,7 +2,9 @@
     'use strict';
 
     angular.module('app')
-        .config(($stateProvider, $urlRouterProvider, $log) => {
+        .config(($stateProvider, $urlRouterProvider) => {
+            const $log = angular.injector(['ng']).get('$log');
+
             // top level routes (all other routes are defined within their own module)
             $stateProvider.state('app', {
                 abstract: true, // jshint ignore:line

@@ -1,3 +1,9 @@
+/**
+ * @author    Marco Turi <marco.turi@hotmail.it>
+ * @author    Damien Dell'Amico <damien.dellamico@saldiprivati.com>
+ * @copyright Copyright (c) 2016
+ * @license   GPL-3.0
+ */
 'use strict';
 
 import del from 'del';
@@ -13,25 +19,18 @@ import bytediff from 'gulp-bytediff';
 import minifyCss from 'gulp-minify-css';
 import runSequence from 'run-sequence';
 import path from '../paths';
-//import {BANNER, CDN_URL, GH_PAGES_BASE_URL} from '../const';
 
-//=============================================
-//            UTILS FUNCTIONS
-//=============================================
 const LOG = util.log;
 const COLORS = util.colors;
 const argv = util.env;
 
-//=============================================
-//                  TASKS
-//=============================================
 /**
- * The 'clean' task delete 'build' and '.tmp' directories.
+ * The 'clean' task delete 'www' directory.
  *
  * @param {Function} done - callback when complete
  */
 gulp.task('clean', (cb) => {
-    const files = [].concat(path.build.basePath, path.tmp.basePath);
+    const files = [].concat(path.build.basePath);
     LOG('Cleaning: ' + COLORS.blue(files));
 
     return del(files, cb);
@@ -58,21 +57,10 @@ gulp.task('fonts', () => {
 });
 
 /**
- * The 'copy' task for maps
- *
- * @return {Stream}
- */
-gulp.task('maps', () => {
-    return gulp.src(`${path.tmp.scripts}${path.fileNames.jsBundle}.js.map`)
-        .pipe(gulp.dest(path.build.dist.scripts));
-});
-
-
-/**
  * The 'compile' task compile all js, css and html files.
  *
  * 1. it inject bundle into `index.html`
- * 2. css      - replace local path with CDN url, minify, add revision number, add banner header
+ * 2. css      - minify, add revision number
  *    js       - annotates the sources before minifying, minify, add revision number, add banner header
  *    html     - replace local path with CDN url, minify
  *
@@ -111,7 +99,6 @@ gulp.task('build', (cb) => {
         ['clean'],
         ['sass', 'scripts', 'templates'],
         ['html', 'images', 'fonts'],
-        ['maps'],
         cb
     );
 });

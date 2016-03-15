@@ -1,3 +1,10 @@
+/**
+ * @author    Marco Turi <marco.turi@hotmail.it>
+ * @author    Damien Dell'Amico <damien.dellamico@saldiprivati.com>
+ * @copyright Copyright (c) 2016
+ * @license   GPL-3.0
+ */
+
 'use strict';
 
 import gulp from 'gulp';
@@ -21,15 +28,15 @@ gulp.task('watch', () => {
 
     // Watch css files
     gulp.watch(path.app.styles, () => {
-        runSequence('sass', 'sass-cp', 'bs-reload');
+        runSequence('sass', 'bs-reload');
     });
 
-    // Watch js files
+    // Watch js files and re-work only the SINGLE JS file edited + index.html. NOT ALL FILES
     gulp
         .watch(path.app.scripts)
         .on('change', (file) => {
             gulp.src(file.path, {base: path.app.scriptBasePath})
-                .pipe(plumber())
+                .pipe(plumber()) //for prevent error to stop the task
                 .pipe(sourcemaps.init())
                 .pipe(babel())
                 .pipe(ngAnnotate({
@@ -47,7 +54,7 @@ gulp.task('watch', () => {
 
     // Watch tpl files
     gulp.watch(path.app.templates, () => {
-        return runSequence('templates', 'templates-cp', 'bs-reload');
+        return runSequence('templates', 'bs-reload');
     });
 
     // Watch html files
@@ -57,7 +64,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('bs-reload', () => {
-    if(isWin) {
+    if(!isWin) {
         browserSync.reload();
     }
 });

@@ -1,3 +1,10 @@
+/**
+ * @author    Marco Turi <marco.turi@hotmail.it>
+ * @author    Damien Dell'Amico <damien.dellamico@saldiprivati.com>
+ * @copyright Copyright (c) 2016
+ * @license   GPL-3.0
+ */
+
 'use strict';
 
 import gulp from 'gulp';
@@ -22,13 +29,15 @@ if(!ENV.match(new RegExp(/prod|dev|test/))) {
     process.exit(1);
 }
 
-// scripts - clean dist dir then annotate, uglify, concat
-
-
+/**
+ * Manage js files. This task is run only on BUILD task (i.e. only once), for watch see the watch task.
+ *
+ * @return {Stream}
+ */
 gulp.task('scripts',  () => {
 
     return gulp.src(path.app.scripts)
-        .pipe(plumber())
+        .pipe(plumber()) //for prevent error to stop the task
         .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(gulpif(ENV==='prod', concat(`${path.fileNames.jsBundle}.js`)))
@@ -42,15 +51,5 @@ gulp.task('scripts',  () => {
             sourceRoot: '../../js'
         }))
         .pipe(gulpif(ENV==='prod', rev()))
-        .pipe(gulp.dest(path.build.dist.scripts));
-});
-
-/**
- * The 'copy' task for scripts
- *
- * @return {Stream}
- */
-gulp.task('scripts-cp', () => {
-    return gulp.src(`${path.tmp.scripts}**/*.js`)
         .pipe(gulp.dest(path.build.dist.scripts));
 });
