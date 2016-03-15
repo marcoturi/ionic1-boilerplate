@@ -23,11 +23,7 @@
 #.dockerignore
 
 # Webstorm user-specific stuff:
-.idea/workspace.xml
-.idea/jsLibraryMappings.xml
-.idea/tasks.xml
-.idea/dictionaries
-# .idea/shelf
+.idea/
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
