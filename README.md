@@ -1,4 +1,4 @@
-Ionic App Base Boilerplate
+Ionic App Es6 Boilerplate
 =====================
 
 ## Features
@@ -7,6 +7,8 @@ Ionic App Base Boilerplate
   * Eslint with cordova and airbnb/base rules
   * Bundling system: Inject only the files really edited instead of re-bundle all js files (vary important in large projects)
   * Use browsersync on unix systems and livereload on windows
+  * Includes lodash (see js/pages/home/home.ctrl.js for an example), ngCordova, angular-component (to start using components in angular 1.4, see component folder)
+  * Vagrant file (not tested yet)
 
 ##<a name="folder-structure"></a>Folder Structure
 
@@ -65,9 +67,9 @@ $ npm run ios           --> run ionic run ios with livereload and production api
 $ npm run android       --> run ionic run android with livereload and production api
 $ npm run web           --> run ionic serve with production api
 $ npm run web-stage     --> run ionic serve with stage api
-$ npm run build         -->  build js files with production api (no concat and uglify)
-$ npm run build-stage   -->  build js files with stage api (no concat and uglify)
-$ npm run build-release -->  build js files with production api (concat and uglify)
+$ npm run build         --> build js files with production api (no concat and uglify)
+$ npm run build-stage   --> build js files with stage api (no concat and uglify)
+$ npm run build-release --> build js files with production api (concat and uglify)
 ```
 
 ##Optional parameters for npm:
@@ -75,7 +77,7 @@ $ npm run build-release -->  build js files with production api (concat and ugli
 --env=prod|dev
 prod: will produce a unique boundle uglified and with revision number for js files.
 dev: all js files will (not vendors of course) will be just transpiled in es5 and copyed into www/js
---api=prod|stage
+--api=prod|stage|mock
 prod: inject in the config file (js/core/env.conditions.js) the flag that will make use of prudction url for api
 stage: same of prod but will enable the stage url instead
 --platform=web|ios|android
@@ -86,6 +88,10 @@ android: ionic run android -l
 --open=true|false
 Open the web browser (this flag works only on unix systems)
 ```
+
+## Todo
+Add test: karma and protractor
+Add ngdoc
 
 ## License
 

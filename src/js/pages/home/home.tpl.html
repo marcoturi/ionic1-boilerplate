@@ -1,12 +1,17 @@
 <ion-view>
     <ion-header-bar>
-        Home
+        <bz-header-nav show-menu="true"
+                       title="{{ vm.CONFIG.APP.appName}}"></bz-header-nav>
     </ion-header-bar>
-    <ion-content overflow-scroll="false">
-        Welcome on {{vm.title}}!!!
+    <ion-content>
+        <div class="card">
+            <div class="item item-text-wrap">
+                Welcome {{vm.user[0].name}}!
+            </div>
+        </div>
         <ion-input class="item item-input">
-            <ion-label>Prova</ion-label>
-            <input type="text" ng-model="vm.title" name="title">
+            <ion-label>Name</ion-label>
+            <input type="text" ng-model="vm.user[0].name" name="title">
         </ion-input>
     </ion-content>
 </ion-view>

@@ -52,7 +52,7 @@ gulp.task('images', () => {
  * @return {Stream}
  */
 gulp.task('fonts', () => {
-    return gulp.src(path.app.fonts)
+    return gulp.src([].concat(path.app.fonts,path.app.ionicFonts))
         .pipe(gulp.dest(path.build.dist.fonts));
 });
 

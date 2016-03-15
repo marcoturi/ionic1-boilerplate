@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "ng-lodash": "^0.4.0",
-    "ngCordova": "^0.1.24-alpha"
+    "ngCordova": "^0.1.24-alpha",
+    "angular-component": "https://github.com/toddmotto/angular-component.git#^0.0.7"
   }
 }

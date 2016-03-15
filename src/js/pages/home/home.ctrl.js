@@ -1,3 +1,9 @@
+/**
+ * @author    Marco Turi <marco.turi@hotmail.it>
+ * @author    Damien Dell'Amico <damien.dellamico@saldiprivati.com>
+ * @copyright Copyright (c) 2016
+ * @license   GPL-3.0
+ */
 (() => {
     'use strict';
 
@@ -10,9 +16,22 @@
      */
     class HomeCtrl {
 
-        constructor() {
+        constructor(lodash, CONFIG) {
             'ngInject';
-            this.title = 'Mami 3';
+            const myArr = [
+                {
+                    name: 'barney',
+                    age: 36,
+                    active: true
+                },
+                {
+                    name: 'fred',
+                    age: 40,
+                    active: false
+                }];
+
+            this.user = lodash.filter(myArr, (o) => !o.active);
+            this.CONFIG = CONFIG;
         }
     }
 

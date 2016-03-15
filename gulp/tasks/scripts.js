@@ -46,10 +46,7 @@ gulp.task('scripts',  () => {
             single_quotes: true
         }))
         .pipe(gulpif(ENV==='prod', uglify()))
-        .pipe(sourcemaps.write('.', {
-            includeContent: false,
-            sourceRoot: '../../js'
-        }))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulpif(ENV==='prod', rev()))
         .pipe(gulp.dest(path.build.dist.scripts));
 });

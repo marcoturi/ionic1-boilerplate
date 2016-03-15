@@ -29,6 +29,7 @@ const isWin = /^win/.test(process.platform);
 let ENV = !!argv.env ? argv.env.toLowerCase() : 'dev';
 let PLATFORM = !!argv.platform ? argv.platform.toLowerCase() : 'web';
 let OPEN_BROWSER = !!argv.open ? argv.open.toLowerCase() : 'true';
+let API = !!argv.api ? argv.api.toLowerCase() : 'prod';
 if (PLATFORM !== 'web') {
     OPEN_BROWSER = 'false';
 }
@@ -48,7 +49,12 @@ if (!ENV.match(new RegExp(/prod|dev|test/))) {
 }
 
 if (!PLATFORM.match(new RegExp(/android|ios|web/))) {
-    LOG(COLORS.red(`Error: The argument 'platform' has incorrect value ${PLATFORM}! Usage: --env=(android|ios|web)`));
+    LOG(COLORS.red(`Error: The argument 'platform' has incorrect value ${PLATFORM}! Usage: --platform=(android|ios|web)`));
+    process.exit(1);
+}
+
+if (!API.match(new RegExp(/prod|stage|mock/))) {
+    LOG(COLORS.red(`Error: The argument 'api' has incorrect value ${API}! Usage: --api=(prod|stage|mock)`));
     process.exit(1);
 }
 
@@ -59,7 +65,7 @@ function startBrowserSync(baseDir, files, browser) {
     browserSync({
         files: files,
         open: OPEN_BROWSER,
-        port: 8000,
+        port: 8100,
         notify: false,
         server: {
             baseDir: baseDir
@@ -80,12 +86,12 @@ function startBrowserSync(baseDir, files, browser) {
  * @return {Stream}
  */
 gulp.task('config', () => {
-    const mock = !!argv.mock ? argv.mock === 'true' : false;
-    return gulp.src(path.app.config.conditions)
+    const mock = API === 'mock';
+    return gulp.src(path.app.config)
         .pipe(inject(gulp.src('.'), {
             starttag: '/* inject:env */',
             endtag: '/* endinject */',
-            transform: () => `export var mock = ${mock};\nexport var optimize = ${OPTIMIZE === 'true' || ENV=== 'prod'};\nexport var environment = '${env}';`
+            transform: () => `const mock = ${mock};\nconst environment = '${ENV}'\nconst api='${API}';`
         }))
         .pipe(gulp.dest(path.app.config.basePath));
 });
@@ -121,10 +127,10 @@ gulp.task('serve', () => {
     switch (ENV) {
         case 'dev':
         case 'test':
-            serveTasks = ['build', 'watch'];
+            serveTasks = ['config', 'build', 'watch'];
             break;
         case 'prod':
-            serveTasks = ['build'];
+            serveTasks = ['config', 'build'];
             break;
     }
 

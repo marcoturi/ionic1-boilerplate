@@ -1,0 +1,26 @@
+<!--    Note:
+        The transactions are implemented through the function setDirection(), possibile paramteres
+        are forward, back, enter, exit, swap.
+        See http://ionicframework.com/docs/api/directive/navDirection/
+        Unfortunatly there is a bug in trasitions and you can't use the syntax nav-direction in the template.
+        See https://github.com/driftyco/ionic/issues/5279
+-->
+<ion-header-bar class="bar-light sp-barTop">
+    <div class="buttons">
+        <a class="button" menu-toggle="left" ng-if="::vm.showMenu"><span class="ion-navicon-round"></span></a>
+        <a ui-sref="{{ ::vm.homeUrl }}" class="button" ng-click="vm.setDirection('enter');"
+           ng-if="::vm.homeUrl"><span class="ion-home"></span></a>
+        <a class="button" ui-sref="{{ ::vm.backUrl }}" ng-click="vm.setDirection('back');"
+           ng-if="::vm.backUrl"><span class="ion-chevron-left"></span></a>
+        <a class="button" ng-click="vm.doHistoryBack(); vm.setDirection('back');"
+           nav-direction="back" ng-if="::vm.historyBack" ><span class="ion-chevron-left"></span></a>
+    </div>
+    <a ui-sref="{{ ::vm.APP_CONST.ROUTES.HOME }}" class="title"
+       ng-click="vm.setDirection('enter');" ng-if="!vm.title &&  !vm.titleSynced">
+        <img ng-src="img/logo.png"/>
+    </a>
+    <h1 class="title" ng-if="vm.title || vm.titleSynced" >
+          <span ng-if="vm.title">{{ ::vm.title}}</span>
+          <span ng-if="vm.titleSynced">{{ ::vm.titleSynced}}</span>
+    </h1>
+</ion-header-bar>

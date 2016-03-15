@@ -18,12 +18,10 @@ const paths = {
         fonts: `${root}/src/font/**/*.{eot,svg,ttf,woff,woff2}`,
         styles: `${root}/src/css/**/*.scss`,
         ionicStyle: `${root}/scss/ionic.app.scss`,
+        ionicFonts: `${root}/src/lib/ionic/fonts/**`,
         styleBasePath:`${root}/src/css/`,
         images: `${root}/src/img/**/*.{png,gif,jpg,jpeg}`,
-        config: {
-            basePath: `${root}/src/js/core/config/`,
-            conditions: `${root}/src/js/core/config/env.conditions.js`
-        },
+        config: `${root}/src/js/core/config.js`,
         scriptBasePath: `${root}/src/js`,
         scripts: [
             `${root}/src/js/**/*module*.js`,
@@ -46,7 +44,6 @@ const paths = {
                 `${root}/www/js/**/*module*.js`,
                 `${root}/www/js/**/*.js`,
                 `!${root}/www/js/**/*.spec.js`
-
             ],
             templates: `${root}/www/templates/`
         },
