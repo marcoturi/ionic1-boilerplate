@@ -12,7 +12,6 @@
 /plugins/
 /www/
 /dist/
-.idea/
 .tmp/
 #/www/js/core/config/config.js
 

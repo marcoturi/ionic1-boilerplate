@@ -36,7 +36,7 @@ Ionic App Base Boilerplate
 ###<a name="platform-and-tools"></a>Platform & Tools
 You need to install Node.js and then the development tools. Node.js comes with a package manager called [npm](http://npmjs.org) (this project has been tested with npm 3.6.0) for installing NodeJS applications and libraries.
 
-[Install Node.js](http://nodejs.org/download/) (node.js version used >= 5.6.0)
+[Install Node.js](http://nodejs.org/download/) (node.js version used 5.6.0)
 
 Tip: on unix systems we suggest to use nvm for manage nodeJs and NPM (https://github.com/creationix/nvm)
 
@@ -71,6 +71,7 @@ $ npm run build-release -->  build js files with production api (concat and ugli
 ```
 
 ##Optional parameters for npm:
+```
 --env=prod|dev
 prod: will produce a unique boundle uglified and with revision number for js files.
 dev: all js files will (not vendors of course) will be just transpiled in es5 and copyed into www/js
@@ -84,6 +85,7 @@ android: ionic run android -l
  **Note:** always use the npm/gulp tasks, don't use standalone ionic commands (i.e ionic run ios) becuase you need also the tasks of gulp for watching, transpiling and copy the files from the src folder
 --open=true|false
 Open the web browser (this flag works only on unix systems)
+```
 
 ## License
 
