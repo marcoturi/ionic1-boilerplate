@@ -7,7 +7,7 @@
 (() => {
     'use strict';
 
-    const onConfig = /* @ngInject */ ($ionicConfigProvider, $compileProvider) => {
+    const onConfig = /* @ngInject */ ($ionicConfigProvider, $compileProvider, CONFIG) => {
         /*
          http://forum.ionicframework.com/t/change-hide-ion-nav-back-button-text/5260/14
          remove back button text, use unicode em space characters to
@@ -38,7 +38,7 @@
         }
 
         // switch off AngularJS debug info in production for better performance
-        $compileProvider.debugInfoEnabled(true);
+        $compileProvider.debugInfoEnabled(CONFIG.devMode);
 
         // AngularJS Whitelisting. You have to whitelist image URLs so Angular allows file:// URLs
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);

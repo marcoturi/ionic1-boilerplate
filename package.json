@@ -24,7 +24,8 @@
     "web-stage": "gulp serve --env=dev --api=stage --platform=web",
     "build": "gulp build --env=dev --api=prod",
     "build-stage": "gulp build --env=dev --api=stage",
-    "build-release": "gulp build --env=prod --api=prod"
+    "build-release": "gulp build --env=prod --api=prod",
+    "fast": "gulp serve --env=dev --api=prod --platform=web --nochk=true"
   },
   "pre-commit": [
     "lint"
@@ -58,7 +59,9 @@
     "gulp-minify-html": "^1.0.6",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-plumber": "^1.1.0",
+    "gulp-remove-html": "^1.1.2",
     "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
     "gulp-rev": "^7.0.0",
     "gulp-sass": "^2.0.4",
     "gulp-shell": "^0.5.2",

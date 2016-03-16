@@ -28,7 +28,7 @@ gulp.task('watch', () => {
 
     // Watch css files
     gulp.watch(path.app.styles, () => {
-        runSequence('sass', 'bs-reload');
+        runSequence(['sass'], ['bs-reload']);
     });
 
     // Watch js files and re-work only the SINGLE JS file edited + index.html. NOT ALL FILES
@@ -39,22 +39,18 @@ gulp.task('watch', () => {
                 .pipe(plumber()) //for prevent error to stop the task
                 .pipe(sourcemaps.init())
                 .pipe(babel())
-                .pipe(ngAnnotate({
-                    add: true,
-                    single_quotes: true
-                }))
                 .pipe(sourcemaps.write('.', {
                     includeContent: false,
                     sourceRoot: '../../js'
                 }))
                 .pipe(gulp.dest(path.build.dist.scripts));
 
-            return runSequence('html', 'bs-reload');
+            return runSequence(['html'], ['bs-reload']);
         });
 
     // Watch tpl files
     gulp.watch(path.app.templates, () => {
-        return runSequence('templates', 'bs-reload');
+        return runSequence(['templates'], ['bs-reload']);
     });
 
     // Watch html files

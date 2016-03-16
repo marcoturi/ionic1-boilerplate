@@ -20,7 +20,7 @@
             'ngInject';
 
             this.ROUTES = APP_CONST.ROUTES;
-            $log.debug(`CONFIG: ${angular.toJson(CONFIG.APP, true)}`);
+            $log.debug(`CONFIG: ${angular.toJson(CONFIG, true)}`);
 
             $scope.$on('$ionicView.beforeEnter', () => {
                 $ionicSideMenuDelegate.canDragContent(false);

@@ -32,7 +32,7 @@ gulp.task('sass', () => {
         .pipe(sass())
         .on('error', sass.logError)
         .pipe(autoprefixer('last 2 version'))
-        .pipe(sourcemaps.write('../styles'))
+        .pipe(sourcemaps.write('../css'))
         .pipe(gulp.dest(path.app.styleBasePath))
         .pipe(gulpif(!isWin,browserSync.reload({stream:true})));
 });

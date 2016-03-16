@@ -40,13 +40,13 @@ gulp.task('scripts',  () => {
         .pipe(plumber()) //for prevent error to stop the task
         .pipe(sourcemaps.init())
         .pipe(babel())
-        .pipe(gulpif(ENV==='prod', concat(`${path.fileNames.jsBundle}.js`)))
+        .pipe(gulpif(ENV === 'prod', concat(`${path.fileNames.jsBundle}.js`)))
         .pipe(ngAnnotate({
             add: true,
             single_quotes: true
         }))
-        .pipe(gulpif(ENV==='prod', uglify()))
+        .pipe(gulpif(ENV === 'prod', uglify()))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulpif(ENV==='prod', rev()))
+        .pipe(gulpif(ENV === 'prod', rev()))
         .pipe(gulp.dest(path.build.dist.scripts));
 });

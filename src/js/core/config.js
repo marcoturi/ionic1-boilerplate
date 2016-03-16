@@ -18,14 +18,12 @@
     const webMode = !navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/);
 
     const appConfig = {
-        APP: {
-            baseServiceUrl: APIurl,
-            appName: 'Ionic Boiler Plate',
-            FBAppId: 123456789,
-            devMode,
-            webMode,
-            mock
-        }
+        baseServiceUrl: APIurl,
+        appName: 'Ionic Boiler Plate',
+        FBAppId: 123456789,
+        devMode,
+        webMode,
+        mock
     };
 
     angular.module('app.core').constant('CONFIG', appConfig);

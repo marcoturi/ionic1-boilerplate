@@ -1,8 +1,4 @@
 /ionic.project
-/www/build/js/app.bundle.min.js
-/www/build
-/www/build/js/tpl.bundle.min.js
-/www/docs
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
@@ -12,7 +8,9 @@
 /plugins/
 /www/
 /dist/
-.tmp/
+/src/css/ionic.app.css
+/src/css/ionic.app.min.css
+/src/lib/*
 #/www/js/core/config/config.js
 
 # Vagrant - docker

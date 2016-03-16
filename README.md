@@ -7,7 +7,11 @@ Ionic App Es6 Boilerplate
   * Eslint with cordova and airbnb/base rules
   * Bundling system: Inject only the files really edited instead of re-bundle all js files (vary important in large projects)
   * Use browsersync on unix systems and livereload on windows
-  * Includes lodash (see js/pages/home/home.ctrl.js for an example), ngCordova, angular-component (to start using components in angular 1.4, see component folder)
+  * Includes
+    - Lodash (see js/pages/home/home.ctrl.js for an example)
+    - ngCordova
+    - Angular-component (to start using components in angular 1.4, see component folder)
+    - Ionic.io library (note: there is a specific tasks to manage it in gulp folder)
   * Vagrant file (not tested yet)
 
 ##<a name="folder-structure"></a>Folder Structure
@@ -70,6 +74,7 @@ $ npm run web-stage     --> run ionic serve with stage api
 $ npm run build         --> build js files with production api (no concat and uglify)
 $ npm run build-stage   --> build js files with stage api (no concat and uglify)
 $ npm run build-release --> build js files with production api (concat and uglify)
+$ npm run fast          --> run ionic serve whitout checking dependeces
 ```
 
 ##Optional parameters for npm:
@@ -87,6 +92,8 @@ android: ionic run android -l
  **Note:** always use the npm/gulp tasks, don't use standalone ionic commands (i.e ionic run ios) becuase you need also the tasks of gulp for watching, transpiling and copy the files from the src folder
 --open=true|false
 Open the web browser (this flag works only on unix systems)
+--nochk=true|false
+Launch npm install && bower install (usefull on big teams but you get 8-10 sec of delay). Use npm run fast as an alternative of npm run web.
 ```
 
 ## Todo

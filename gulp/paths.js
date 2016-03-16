@@ -19,6 +19,8 @@ const paths = {
         styles: `${root}/src/css/**/*.scss`,
         ionicStyle: `${root}/scss/ionic.app.scss`,
         ionicFonts: `${root}/src/lib/ionic/fonts/**`,
+        ionicIo: `${root}/src/lib/ionic-platform-web-client/dist/`,
+        ionicIoLib: `${root}/src/lib/ionic-platform-web-client/dist/ionic.io.bundle.js`,
         styleBasePath:`${root}/src/css/`,
         images: `${root}/src/img/**/*.{png,gif,jpg,jpeg}`,
         config: `${root}/src/js/core/config.js`,
@@ -45,7 +47,8 @@ const paths = {
                 `${root}/www/js/**/*.js`,
                 `!${root}/www/js/**/*.spec.js`
             ],
-            templates: `${root}/www/templates/`
+            templates: `${root}/www/templates/`,
+            ionicIo: `${root}/www/lib/ionic-platform-web-client/dist/`
         },
         docs: `${root}/www/docs/`
     },

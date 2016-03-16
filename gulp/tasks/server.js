@@ -74,7 +74,6 @@ function startBrowserSync(baseDir, files, browser) {
     });
 }
 
-
 //=============================================
 //                 TASKS
 //=============================================
@@ -151,6 +150,7 @@ gulp.task('serve', () => {
     }
 
     runSequence(
+        ['doIonicConfigBuild'],
         ['build'],
         ['watch'],
         shouldRun

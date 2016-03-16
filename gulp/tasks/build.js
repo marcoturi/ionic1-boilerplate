@@ -18,16 +18,40 @@ import inject from 'gulp-inject';
 import bytediff from 'gulp-bytediff';
 import minifyCss from 'gulp-minify-css';
 import runSequence from 'run-sequence';
+import gulpRemoveHtml from 'gulp-remove-html';
+import replace from 'gulp-replace';
+import shell from 'gulp-shell';
 import path from '../paths';
 
 const LOG = util.log;
 const COLORS = util.colors;
 const argv = util.env;
 
+let ENV = !!argv.env ? argv.env.toLowerCase() : 'dev';
+let PLATFORM = !!argv.platform ? argv.platform.toLowerCase() : 'web';
+let SKIP_CHECK = !!argv.nochk ? argv.nochk : 'false';
+
+if (!PLATFORM.match(new RegExp(/android|ios|web/))) {
+    LOG(COLORS.red(`Error: The argument 'platform' has incorrect value ${PLATFORM}! Usage: --platform=(android|ios|web)`));
+    process.exit(1);
+}
+
+if (!ENV.match(new RegExp(/prod|dev|test/))) {
+    LOG(COLORS.red(`Error: The argument 'env' has incorrect value ${ENV}! Usage: --env=(dev|test|prod)`));
+    process.exit(1);
+}
+
+/**
+ * Check if dependences are updated, usefull in big teams, but adds 10-15 sec of delay
+ */
+gulp.task('checkDep', shell.task([
+    `npm install && bower install`
+]));
+
 /**
  * The 'clean' task delete 'www' directory.
  *
- * @param {Function} done - callback when complete
+ * @param {Function} cb - callback when complete
  */
 gulp.task('clean', (cb) => {
     const files = [].concat(path.build.basePath);
@@ -68,6 +92,8 @@ gulp.task('fonts', () => {
  */
 gulp.task('html', () => {
     return gulp.src(path.app.html)
+        .pipe(gulpif(PLATFORM === 'web', gulpRemoveHtml()))
+        .pipe(gulpif(ENV === 'prod', replace(/<body /, '<body ng-strict-di ')))
         .pipe(inject(gulp.src(path.build.dist.scriptsBuildOrder, {read: false}), {
             starttag: '<!-- inject:build:js -->',
             ignorePath: ['www'],
@@ -92,11 +118,13 @@ gulp.task('html', () => {
  * The 'build' task gets app ready for deployment by processing files
  * and put them into directory ready for production.
  *
- * @param {Function} done - callback when complete
+ * @param {Function} cb - callback when complete
  */
 gulp.task('build', (cb) => {
+    const firstTask = SKIP_CHECK === 'false' ? ['clean', 'checkDep'] : ['clean'];
+
     runSequence(
-        ['clean'],
+        firstTask,
         ['sass', 'scripts', 'templates'],
         ['html', 'images', 'fonts'],
         cb
