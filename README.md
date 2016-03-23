@@ -16,8 +16,7 @@ Ionic App Es6 Boilerplate
 
 ##<a name="folder-structure"></a>Folder Structure
 
-    src/
-      |- img/                     --> source code that goes to production
+    src/                          --> source code that goes to production
       |- font/                    --> fonts
       |- img/                     --> image files
       |- js/                      --> ionic app files
