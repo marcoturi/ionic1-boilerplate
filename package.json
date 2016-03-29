@@ -25,7 +25,8 @@
     "build": "gulp build --env=dev --api=prod",
     "build-stage": "gulp build --env=dev --api=stage",
     "build-release": "gulp build --env=prod --api=prod",
-    "fast": "gulp serve --env=dev --api=prod --platform=web --nochk=true"
+    "fast": "gulp serve --env=dev --api=prod --platform=web --nochk=true",
+    "test": "gulp test"
   },
   "pre-commit": [
     "lint"
