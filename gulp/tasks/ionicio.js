@@ -8,7 +8,6 @@
 'use strict';
 
 import gulp from 'gulp';
-import changed from 'gulp-changed';
 import runSequence from 'run-sequence';
 import shell from 'gulp-shell';
 import del from 'del';

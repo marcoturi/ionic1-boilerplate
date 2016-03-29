@@ -6,12 +6,12 @@ Ionic App Es6 Boilerplate
   * Mocked Backend Workflow - help with mocking backend-less development
   * Eslint with cordova and airbnb/base rules
   * Bundling system: Inject only the files really edited instead of re-bundle all js files (vary important in large projects)
-  * Use browsersync on unix systems and livereload on windows
   * Includes
     - Lodash (see js/pages/home/home.ctrl.js for an example)
     - ngCordova
     - Angular-component (to start using components in angular 1.4, see component folder)
     - Ionic.io library (note: there is a specific tasks to manage it in gulp folder)
+  * Test with Karma
   * Vagrant file (not tested yet)
 
 ##<a name="folder-structure"></a>Folder Structure

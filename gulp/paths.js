@@ -16,7 +16,7 @@ const paths = {
     app: {
         basePath: `${root}/src/`,
         fonts: `${root}/src/font/**/*.{eot,svg,ttf,woff,woff2}`,
-        styles: `${root}/src/css/**/*.scss`,
+        styles: `${root}/scss/**/*.scss`,
         ionicStyle: `${root}/scss/ionic.app.scss`,
         ionicFonts: `${root}/src/lib/ionic/fonts/**`,
         ionicIo: `${root}/src/lib/ionic-platform-web-client/dist/`,

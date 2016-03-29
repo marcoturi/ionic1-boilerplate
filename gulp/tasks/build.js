@@ -11,11 +11,9 @@ import rev from 'gulp-rev';
 import gulp from 'gulp';
 import util from 'gulp-util';
 import size from 'gulp-size';
-import uglify from 'gulp-uglify';
 import gulpif from 'gulp-if';
 import usemin from 'gulp-usemin';
 import inject from 'gulp-inject';
-import bytediff from 'gulp-bytediff';
 import minifyCss from 'gulp-minify-css';
 import runSequence from 'run-sequence';
 import gulpRemoveHtml from 'gulp-remove-html';
@@ -68,6 +66,16 @@ gulp.task('clean', (cb) => {
 gulp.task('images', () => {
     return gulp.src(path.app.images)
         .pipe(gulp.dest(path.build.dist.images));
+});
+
+/**
+ * The 'copy' task for json fixtures
+ *
+ * @return {Stream}
+ */
+gulp.task('fixtures', () => {
+    return gulp.src(path.app.json)
+        .pipe(gulpif(ENV === 'dev', gulp.dest(path.build.dist.scripts)));
 });
 
 /**
@@ -126,7 +134,7 @@ gulp.task('build', (cb) => {
     runSequence(
         firstTask,
         ['sass', 'scripts', 'templates'],
-        ['html', 'images', 'fonts'],
+        ['html', 'images', 'fonts', 'fixtures'],
         cb
     );
 });

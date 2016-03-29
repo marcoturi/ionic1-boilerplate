@@ -7,3 +7,5 @@ gulpfile.js
 gulp/**/*
 platforms/
 plugins/
+karma.conf.js
+src/js/**/*.spec.js

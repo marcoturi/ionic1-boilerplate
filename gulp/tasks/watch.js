@@ -8,15 +8,12 @@
 'use strict';
 
 import gulp from 'gulp';
-import browserSync from 'browser-sync';
 import runSequence from 'run-sequence';
-import gulpif from 'gulp-if';
 import sourcemaps from 'gulp-sourcemaps';
 import babel from 'gulp-babel';
 import ngAnnotate from 'gulp-ng-annotate';
 import plumber from 'gulp-plumber';
 import path from '../paths';
-const isWin = /^win/.test(process.platform);
 
 /**
  * The 'watch' task set up the checks to see if any of the files listed below
@@ -24,12 +21,12 @@ const isWin = /^win/.test(process.platform);
  */
 gulp.task('watch', () => {
     // Watch images and fonts files
-    gulp.watch([path.app.images, path.app.fonts], ['images', 'fonts'], [browserSync.reload]);
+    gulp.watch([path.app.images, path.app.fonts], ['images', 'fonts']);
 
     // Watch css files
-    gulp.watch(path.app.styles, () => {
-        runSequence(['sass'], ['bs-reload']);
-    });
+    gulp.watch(path.app.styles, () => runSequence(['sass'], ['html']));
+
+    gulp.watch(path.app.json, ['fixtures']);
 
     // Watch js files and re-work only the SINGLE JS file edited + index.html. NOT ALL FILES
     gulp
@@ -39,28 +36,21 @@ gulp.task('watch', () => {
                 .pipe(plumber()) //for prevent error to stop the task
                 .pipe(sourcemaps.init())
                 .pipe(babel())
-                .pipe(sourcemaps.write('.', {
-                    includeContent: false,
-                    sourceRoot: '../../js'
+                .pipe(ngAnnotate({
+                    add: true,
+                    single_quotes: true
                 }))
+                .pipe(sourcemaps.write('.'))
                 .pipe(gulp.dest(path.build.dist.scripts));
 
-            return runSequence(['html'], ['bs-reload']);
+            return runSequence(['html']);
         });
 
     // Watch tpl files
-    gulp.watch(path.app.templates, () => {
-        return runSequence(['templates'], ['bs-reload']);
-    });
+    gulp.watch(path.app.templates, ['templates']);
 
     // Watch html files
     // we re-build all because if the index.html is edited it's probabily because of a new lib included or
     // edited, so instead of watching /lib we just watch the index.html
-    gulp.watch(path.app.html, ['build'], [browserSync.reload]);
-});
-
-gulp.task('bs-reload', () => {
-    if(!isWin) {
-        browserSync.reload();
-    }
+    gulp.watch(path.app.html, ['build']);
 });
