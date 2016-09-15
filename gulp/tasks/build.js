@@ -27,6 +27,7 @@ const argv = util.env;
 let ENV = !!argv.env ? argv.env.toLowerCase() : 'dev';
 let PLATFORM = !!argv.platform ? argv.platform.toLowerCase() : 'web';
 let SKIP_CHECK = !!argv.nochk ? argv.nochk : 'false';
+let API = !!argv.api ? argv.api.toLowerCase() : 'prod';
 
 if (!PLATFORM.match(new RegExp(/android|ios|web/))) {
     LOG(COLORS.red(`Error: The argument 'platform' has incorrect value ${PLATFORM}! Usage: --platform=(android|ios|web)`));
@@ -38,6 +39,10 @@ if (!ENV.match(new RegExp(/prod|dev|test/))) {
     process.exit(1);
 }
 
+if (!API.match(new RegExp(/prod|stage|mock/))) {
+    LOG(COLORS.red(`Error: The argument 'api' has incorrect value ${API}! Usage: --api=(prod|stage|mock)`));
+    process.exit(1);
+}
 /**
  * Check if dependences are updated, usefull in big teams, but adds 10-15 sec of delay
  */
@@ -88,6 +93,23 @@ gulp.task('fonts', () => {
 });
 
 /**
+ * The 'config' task is to configure environment by injecting
+ * global env variable into the `index.html`.
+ *
+ * @return {Stream}
+ */
+gulp.task('config', () => {
+    const mock = API === 'mock';
+    return gulp.src(path.app.config)
+        .pipe(inject(gulp.src('.'), {
+            starttag: '/* inject:env */',
+            endtag: '/* endinject */',
+            transform: () => `const mock = ${mock};\n\tconst environment = '${ENV}';\n\tconst api = '${API}';`
+        }))
+        .pipe(gulp.dest(path.app.configFolder));
+});
+
+/**
  * The 'compile' task compile all js, css and html files.
  *
  * 1. it inject bundle into `index.html`
@@ -113,8 +135,7 @@ gulp.task('html', () => {
             jsTemplate: [
                 gulpif(argv.prod, rev())
             ],
-            jsVendor: [],
-            html: []
+            jsVendor: []
         }))
         .pipe(gulp.dest(path.build.dist.basePath))
         .pipe(size({title: 'compile', showFiles: true}));

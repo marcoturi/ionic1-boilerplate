@@ -7,5 +7,6 @@ gulpfile.js
 gulp/**/*
 platforms/
 plugins/
-karma.conf.js
+test/karma.conf.js
+test/protractor.config.js
 src/js/**/*.spec.js

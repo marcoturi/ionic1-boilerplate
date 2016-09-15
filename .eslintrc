@@ -37,7 +37,8 @@
   },
   "globals": {
     "cordova": true,
-    "ionic": true
+    "ionic": true,
+    "navigator": true
   },
   "plugins":  [
     "protractor",

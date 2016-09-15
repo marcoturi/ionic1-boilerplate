@@ -115,4 +115,4 @@ Add ngdoc
 
     Copyright (c) 2016 Marco Turi & Damien Dell'Amico
 
-    Source code is open source and released under the GNU GPL v3 license.
+    Source code is open source and released under the MIT license.

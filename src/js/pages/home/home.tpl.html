@@ -1,17 +1,17 @@
 <ion-view>
     <ion-header-bar>
         <bz-header-nav show-menu="true"
-                       title="{{ vm.CONFIG.appName }}"></bz-header-nav>
+                       title="{{ ::vm.CONFIG.appName }}"></bz-header-nav>
     </ion-header-bar>
     <ion-content>
         <div class="card">
             <div class="item item-text-wrap">
-                Welcome <span id="wecomeUsername">{{vm.user[0].name}}</span>!
+                Welcome <span id="wecomeUsername">{{vm.user.active.name}}</span>!
             </div>
         </div>
         <ion-input class="item item-input">
             <ion-label>Name</ion-label>
-            <input type="text" ng-model="vm.user[0].name" name="title" id="username">
+            <input type="text" ng-model="vm.user.active.name" name="title" id="username">
         </ion-input>
     </ion-content>
 </ion-view>

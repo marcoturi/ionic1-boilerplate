@@ -10,6 +10,8 @@
     /**
      * @ngdoc controller
      * @name app.home.controller: HomeController
+     * @requires lodash
+     * @requires CONFIG
      * @module app.home.:HomeController
      * @description
      * Home Controller.
@@ -30,7 +32,8 @@
                     active: false
                 }];
 
-            this.user = lodash.filter(myArr, (o) => !o.active);
+            this.user = lodash.filter(myArr, o => !o.active);
+            this.user.active = this.user[0];
             this.CONFIG = CONFIG;
         }
     }

@@ -16,7 +16,7 @@
      */
     class ApplicationCtrl {
 
-        constructor($scope, $ionicSideMenuDelegate, APP_CONST, CONFIG, $log) {
+        constructor($scope, $ionicSideMenuDelegate, APP_CONST, CONFIG, $log, $window) {
             'ngInject';
 
             this.ROUTES = APP_CONST.ROUTES;
@@ -35,8 +35,8 @@
              * @return {string} version
              */
             this.getAppVersion = () => {
-                if (window.appVersion) {
-                    return window.appVersion;
+                if ($window.appVersion) {
+                    return $window.appVersion;
                 }
                 return '0.0.0';
             };

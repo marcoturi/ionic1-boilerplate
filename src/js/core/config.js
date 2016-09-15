@@ -7,6 +7,8 @@
 (() => {
     'use strict';
 
+    /*eslint indent:0*/
+    /*eslint no-tabs:0*/
     /* inject:env */
     const mock = false;
 	const environment = 'dev';

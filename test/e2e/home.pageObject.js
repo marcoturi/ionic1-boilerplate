@@ -1,13 +1,14 @@
 'use strict';
 
-var HomePage = function(url) {
-    var username = element(by.id('username'));
-
-    this.setUsername = function(user) {
-        username.sendKeys(user);
-    };
-    
-    browser.get(url);
-};
+class HomePage {
+    constructor() {
+        this.username = element(by.id('username'));
+        this.welcome = element(by.id('wecomeUsername'));
+        this.setUsername = (user) => {
+            this.username.clear();
+            this.username.sendKeys(user);
+        };
+    }
+}
 
 module.exports = HomePage;
