@@ -13,19 +13,17 @@
       <script src="../src/lib/ionic/js/ionic.bundle.min.js"></script>
       <script src="../src/lib/ng-lodash/build/ng-lodash.min.js"></script>
       <script src="../src/lib/ngCordova/dist/ng-cordova.min.js"></script>
-      <script src="../src/lib/angular-component/dist/angular-component.min.js"></script>
       <script src="../src/lib/ionic-platform-web-client/dist/ionic.io.bundle.js"></script>
     <!-- endbuild -->
-
-    <!--<Deject>-->
-      <script src="cordova.js"></script>
-    <!--</Deject>-->
 
     <!-- inject:build:js --><!-- endinject -->
 
     <!-- build:jsTemplate(www) templates/tpl.bundle.js -->
       <script src="../www/templates/tpl.bundle.js"></script>
     <!-- endbuild -->
+
+    <!-- Needed for Cordova/PhoneGap (will be a 404 during development) must be the last script -->
+    <script src="cordova.js"></script>
   </head>
   <body ng-app="app" ng-strict-di="">
 

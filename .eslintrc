@@ -1,7 +1,8 @@
 {
   "parser": "babel-eslint",
   "env": {
-    "node": true
+    "node": true,
+    "jasmine": true
   },
   "rules": {
     "strict": 0,
@@ -12,29 +13,40 @@
     "eol-last": 1,
     // enforce newline at the end of file, with no multiple empty lines
     "no-param-reassign": [
-      2,
+      0,
       {
         "props": false
       }
     ],
-    "angular/window-service": 0,
+
     "indent": [
-      2, 4
+      2, 4, { "SwitchCase": 1 }
     ],
-    "angular/controller-name": [2,"/[A-Z].*Ctrl/"],
-    "angular/controller-as-vm": 0,
     "max-len": [2, 120, 2, {
       "ignoreUrls": true,
       "ignoreComments": false
     }],
-    "spaced-comment": 0
+    "spaced-comment": 0,
+    "no-underscore-dangle": 0,
+    "newline-per-chained-call": 0,
+    "linebreak-style": 0,
+    "angular/controller-name": [2,"/[A-Z].*Ctrl/"],
+    "angular/controller-as-vm": 0,
+    "angular/on-watch": 0,
+    "angular/window-service": 0
   },
   "globals": {
     "cordova": true,
     "ionic": true
   },
+  "plugins":  [
+    "protractor",
+    "jasmine"
+  ],
   "extends": [
     "angular",
-    "airbnb/base"
+    "airbnb/base",
+    "plugin:protractor/recommended",
+    "plugin:jasmine/recommended"
   ]
 }

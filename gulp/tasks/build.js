@@ -14,9 +14,8 @@ import size from 'gulp-size';
 import gulpif from 'gulp-if';
 import usemin from 'gulp-usemin';
 import inject from 'gulp-inject';
-import minifyCss from 'gulp-minify-css';
+import minifyCss from 'gulp-clean-css';
 import runSequence from 'run-sequence';
-import gulpRemoveHtml from 'gulp-remove-html';
 import replace from 'gulp-replace';
 import shell from 'gulp-shell';
 import path from '../paths';
@@ -52,7 +51,7 @@ gulp.task('checkDep', shell.task([
  * @param {Function} cb - callback when complete
  */
 gulp.task('clean', (cb) => {
-    const files = [].concat(path.build.basePath);
+    const files = [].concat(path.build.basePath + '**/*');
     LOG('Cleaning: ' + COLORS.blue(files));
 
     return del(files, cb);
@@ -100,7 +99,6 @@ gulp.task('fonts', () => {
  */
 gulp.task('html', () => {
     return gulp.src(path.app.html)
-        .pipe(gulpif(PLATFORM === 'web', gulpRemoveHtml()))
         .pipe(gulpif(ENV === 'prod', replace(/<body /, '<body ng-strict-di ')))
         .pipe(inject(gulp.src(path.build.dist.scriptsBuildOrder, {read: false}), {
             starttag: '<!-- inject:build:js -->',
@@ -133,6 +131,7 @@ gulp.task('build', (cb) => {
 
     runSequence(
         firstTask,
+        ['config'],
         ['sass', 'scripts', 'templates'],
         ['html', 'images', 'fonts', 'fixtures'],
         cb

@@ -8,9 +8,9 @@
     'use strict';
 
     /* inject:env */
-    const api = 'prod';
-    const environment = 'dev';
-    const mock = true;
+    const mock = false;
+	const environment = 'dev';
+	const api = 'prod';
     /* endinject */
 
     const APIurl = api === 'prod' ? 'myprodUrl' : 'mystageUrl';

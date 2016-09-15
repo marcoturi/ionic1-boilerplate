@@ -6,12 +6,12 @@
     <ion-content>
         <div class="card">
             <div class="item item-text-wrap">
-                Welcome {{vm.user[0].name}}!
+                Welcome <span id="wecomeUsername">{{vm.user[0].name}}</span>!
             </div>
         </div>
         <ion-input class="item item-input">
             <ion-label>Name</ion-label>
-            <input type="text" ng-model="vm.user[0].name" name="title">
+            <input type="text" ng-model="vm.user[0].name" name="title" id="username">
         </ion-input>
     </ion-content>
 </ion-view>

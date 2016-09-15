@@ -12,13 +12,11 @@ import util from 'gulp-util';
 import inject from 'gulp-inject';
 import runSequence from 'run-sequence';
 import shell from 'gulp-shell';
-import gulpif from 'gulp-if';
 import path from '../paths';
 
 const argv = util.env;
 const LOG = util.log;
 const COLORS = util.colors;
-
 
 //=============================================
 //         COMMAND LINE ERROR HANDLING
@@ -27,7 +25,6 @@ const COLORS = util.colors;
 let ENV = !!argv.env ? argv.env.toLowerCase() : 'dev';
 let PLATFORM = !!argv.platform ? argv.platform.toLowerCase() : 'web';
 let API = !!argv.api ? argv.api.toLowerCase() : 'prod';
-
 
 if (!ENV.match(new RegExp(/prod|dev|test/))) {
     LOG(COLORS.red(`Error: The argument 'env' has incorrect value ${ENV}! Usage: --env=(dev|test|prod)`));
@@ -60,9 +57,9 @@ gulp.task('config', () => {
         .pipe(inject(gulp.src('.'), {
             starttag: '/* inject:env */',
             endtag: '/* endinject */',
-            transform: () => `const mock = ${mock};\nconst environment = '${ENV}'\nconst api='${API}';`
+            transform: () => `const mock = ${mock};\n\tconst environment = '${ENV}';\n\tconst api = '${API}';`
         }))
-        .pipe(gulp.dest(path.app.config.basePath));
+        .pipe(gulp.dest(path.app.configFolder));
 });
 
 
@@ -79,7 +76,6 @@ gulp.task('ionicrun', shell.task([
 gulp.task('ionicserve', shell.task([
     `ionic serve`
 ]));
-
 
 /**
  * The 'serve' task serve the dev and prod environment.
@@ -98,18 +94,15 @@ gulp.task('serve', () => {
     }
 
     let shouldRun = [];
-    if(PLATFORM === 'web') {
+    if (PLATFORM === 'web') {
         shouldRun.push('ionicserve');
     } else {
         shouldRun.push('ionicrun');
     }
 
     runSequence(
-        ['doIonicConfigBuild'],
         ['build'],
         ['watch'],
         shouldRun
     );
 });
-
-

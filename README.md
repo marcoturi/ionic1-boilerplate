@@ -1,18 +1,18 @@
-Ionic App Es6 Boilerplate
+## Ionic App Boilerplate - Es6 + Karma + Protractor + CI
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![Dependency Status](https://david-dm.org/marcoturi/ionic-es6-boilerplate.svg)](https://david-dm.org/marcoturi/ionic-es6-boilerplate) [![devDependency Status](https://david-dm.org/marcoturi/ionic-es6-boilerplate/dev-status.svg)](https://david-dm.org/marcoturi/ionic-es6-boilerplate#info=devDependencies)
 =====================
 
 ## Features
-  * Use ES6 with Angular 1.x and Ionic 1.x
+  * Use ES6 with Angular 1.x and Ionic 1.x thanks to Babel
   * Mocked Backend Workflow - help with mocking backend-less development
-  * Eslint with cordova and airbnb/base rules
+  * Eslint with cordova and airbnb/base, angular, jasmine, protractor rules
   * Bundling system: Inject only the files really edited instead of re-bundle all js files (vary important in large projects)
   * Includes
     - Lodash (see js/pages/home/home.ctrl.js for an example)
     - ngCordova
-    - Angular-component (to start using components in angular 1.4, see component folder)
-    - Ionic.io library (note: there is a specific tasks to manage it in gulp folder)
-  * Test with Karma
-  * Vagrant file (not tested yet)
+  * Test with Karma and Protractor
+  * Vagrant file
+  * Use git best practice with commitizen and standard-version
 
 ##<a name="folder-structure"></a>Folder Structure
 
@@ -47,7 +47,7 @@ Tip: on unix systems we suggest to use nvm for manage nodeJs and NPM (https://gi
 
 ## Dependences
 After NodeJs and Npm are installed you should run:
-npm install -g eslint ionic cordova gulp-cli bower ios-sim -g
+npm install eslint ionic cordova gulp-cli bower ios-sim -g
 
 ##<a name="installation"></a>Installation
 
@@ -74,6 +74,10 @@ $ npm run build         --> build js files with production api (no concat and ug
 $ npm run build-stage   --> build js files with stage api (no concat and uglify)
 $ npm run build-release --> build js files with production api (concat and uglify)
 $ npm run fast          --> run ionic serve whitout checking dependeces
+$ npm run e2e           --> run protractor tests
+$ npm run outdated      --> check npm dependencies
+$ npm run babel-doctor  --> check babel status
+
 ```
 
 ##Optional parameters for npm:
@@ -95,11 +99,19 @@ Open the web browser (this flag works only on unix systems)
 Launch npm install && bower install (usefull on big teams but you get 8-10 sec of delay). Use npm run fast as an alternative of npm run web.
 ```
 
-## Todo
-Add test: karma and protractor
+**2.** Workflow
+
+1) Code changes
+2) Npm run commit
+3) Repeat (1) and (2) as many time you need
+4) Npm run release -> This command will bump the version of the app according to the previous commits. Also it will generate a changelog and generate agit tag.
+
+Note: Remember to run run npm run release before building the project.
+
+**3.** Todo
 Add ngdoc
 
-## License
+**4.** License
 
     Copyright (c) 2016 Marco Turi & Damien Dell'Amico
 

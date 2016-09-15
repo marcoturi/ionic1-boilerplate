@@ -26,8 +26,6 @@ gulp.task('watch', () => {
     // Watch css files
     gulp.watch(path.app.styles, () => runSequence(['sass'], ['html']));
 
-    gulp.watch(path.app.json, ['fixtures']);
-
     // Watch js files and re-work only the SINGLE JS file edited + index.html. NOT ALL FILES
     gulp
         .watch(path.app.scripts)

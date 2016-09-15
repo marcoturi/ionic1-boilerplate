@@ -5,13 +5,14 @@ module.exports = function (config) {
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
         frameworks: ['jasmine'],
+
         // list of files / patterns to load in the browser
         files: [
             'node_modules/jasmine-async-sugar/jasmine-async-sugar.js',
             'www/vendors/vendor.bundle.js',
             'src/lib/angular-mocks/angular-mocks.js',
             'src/lib/karma-read-json/karma-read-json.js',
-            { pattern: 'www/js/**/*.json', included: false },
+            {pattern: 'src/js/**/*.json', included: false},
             'www/templates/tpl.bundle.js',
             'src/js/**/*module*.js',
             'src/js/**/*.js'
@@ -27,7 +28,6 @@ module.exports = function (config) {
             //filename: function (file) {
             //    return file.originalPath.replace(/\.js$/, '.es5.js');
             //},
-            //eslit: ignore page
             sourceFileName: function (file) {
                 return file.originalPath;
             }
@@ -41,6 +41,7 @@ module.exports = function (config) {
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
         //reporters: [/*'progress', */'story'],   // comment out 'story' and uncomment 'progress' for concise output
         reporters: 'dots',
+        //reporters: 'teamcity',
 
         // web server port
         port: 9876,
@@ -49,8 +50,7 @@ module.exports = function (config) {
         colors: true,
 
         // level of logging
-        // possible values: config.LOG_DISABLE || config.LOG_ERROR ||
-        // config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
         logLevel: config.LOG_INFO,
 
         // enable / disable watching file and executing tests whenever any file changes
@@ -71,4 +71,5 @@ module.exports = function (config) {
         // if true, Karma captures browsers, runs the tests and exits
         singleRun: false
     });
+
 };

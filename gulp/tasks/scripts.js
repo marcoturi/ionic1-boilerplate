@@ -24,7 +24,7 @@ const LOG = util.log;
 const COLORS = util.colors;
 
 let ENV = !!argv.env ? argv.env.toLowerCase() : 'dev';
-if(!ENV.match(new RegExp(/prod|dev|test/))) {
+if (!ENV.match(new RegExp(/prod|dev|test/))) {
     LOG(COLORS.red(`Error: The argument 'env' has incorrect value ${ENV}! Usage: --env=(dev|test|prod)`));
     process.exit(1);
 }
@@ -34,11 +34,11 @@ if(!ENV.match(new RegExp(/prod|dev|test/))) {
  *
  * @return {Stream}
  */
-gulp.task('scripts',  () => {
+gulp.task('scripts', () => {
 
     return gulp.src(path.app.scripts)
         .pipe(plumber()) //for prevent error to stop the task
-        .pipe(sourcemaps.init())
+        .pipe(gulpif(ENV !== 'prod', sourcemaps.init()))
         .pipe(babel())
         .pipe(gulpif(ENV === 'prod', concat(`${path.fileNames.jsBundle}.js`)))
         .pipe(ngAnnotate({
@@ -46,7 +46,7 @@ gulp.task('scripts',  () => {
             single_quotes: true
         }))
         .pipe(gulpif(ENV === 'prod', uglify()))
-        .pipe(sourcemaps.write('.'))
+        .pipe(gulpif(ENV !== 'prod', sourcemaps.write('.')))
         .pipe(gulpif(ENV === 'prod', rev()))
         .pipe(gulp.dest(path.build.dist.scripts));
 });

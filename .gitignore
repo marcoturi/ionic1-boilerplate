@@ -1,17 +1,13 @@
 npm-debug.log
 .eslintcache
-# Specifies intentionally untracked files to ignore when using Git
-# http://git-scm.com/docs/gitignore
-
 /node_modules/
-/resources/
 /platforms/
 /plugins/
-/www/
-/dist/
+/src/lib/*
+/www/*
 /src/css/ionic.app.css
 /src/css/ionic.app.min.css
-/src/lib/*
+
 #/www/js/core/config/config.js
 
 # Vagrant - docker

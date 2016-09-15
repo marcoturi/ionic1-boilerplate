@@ -7,13 +7,21 @@
 
 import gulp from 'gulp';
 import karma from 'karma';
+import util from 'gulp-util';
+
 // karma tasks for TEST
+
+const argv = util.env;
+const ENV = !!argv.env ? argv.env.toLowerCase() : 'dev';
+
+console.log('TEST ENV ===> %s', ENV);
 
 const runtest =  (single, done) => {
     new karma.Server({
         configFile: __dirname + '/../../karma.conf.js',
         singleRun: single,
-        autoWatch: !single
+        autoWatch: !single,
+        reporters: ENV === 'dev' ? 'dots' : 'teamcity'
     }, done).start();
 };
 
