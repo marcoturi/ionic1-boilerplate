@@ -57,7 +57,7 @@ $ git clone https://github.com/marcoturi/ionic-es6-boilerplate.git
 $ cd ionic-es6-boilerplate
 ```
 
-** 2.** Install local dependencies
+**2.** Install local dependencies
 ```bash
 $ npm install && bower install
 ```
@@ -99,7 +99,7 @@ Open the web browser (this flag works only on unix systems)
 Launch npm install && bower install (usefull on big teams but you get 8-10 sec of delay). Use npm run fast as an alternative of npm run web.
 ```
 
-** 2.** Workflow
+**2.** Workflow
 
 1) Code changes
 2) Npm run commit
@@ -108,10 +108,10 @@ Launch npm install && bower install (usefull on big teams but you get 8-10 sec o
 
 Note: Remember to run run npm run release before building the project.
 
-** 3.** Todo
+**3.** Todo
 Add ngdoc
 
-** 4.** License
+**4.** License
 
     Copyright (c) 2016 Marco Turi & Damien Dell'Amico
 
