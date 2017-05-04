@@ -14,7 +14,7 @@
   * Vagrant file
   * Use git best practice with commitizen and standard-version
 
-##<a name="folder-structure"></a>Folder Structure
+## <a name="folder-structure"></a>Folder Structure
 
     src/                          --> source code that goes to production
       |- font/                    --> fonts
@@ -36,9 +36,9 @@
       |- css/                     --> css files
       |- index.html               --> app main file
 
-##<a name="installation-and-configuration"></a>Installation & Configuration
+## <a name="installation-and-configuration"></a>Installation & Configuration
 
-###<a name="platform-and-tools"></a>Platform & Tools
+### <a name="platform-and-tools"></a>Platform & Tools
 You need to install Node.js and then the development tools. Node.js comes with a package manager called [npm](http://npmjs.org) (this project has been tested with npm 3.6.0) for installing NodeJS applications and libraries.
 
 [Install Node.js](http://nodejs.org/download/) (node.js version used 5.6.0)
@@ -49,7 +49,7 @@ Tip: on unix systems we suggest to use nvm for manage nodeJs and NPM (https://gi
 After NodeJs and Npm are installed you should run:
 npm install eslint ionic cordova gulp-cli bower ios-sim -g
 
-##<a name="installation"></a>Installation
+## <a name="installation"></a>Installation
 
 **1.** Clone or [fork](https://github.com/marcoturi/ionic-es6-boilerplate.git) this repository:
 ```bash
@@ -63,7 +63,7 @@ $ npm install && bower install
 ```
  **Note:** There is a bug with livereload on Ios. If you try "ionic state restore" after you clone this repository, to init the project, the livereload function will not work. As a temporary fix you can copy platforms/ and plugins/ from a new project (i.e. ionic start blank blank).
 
-##Commands
+## Commands
 ```bash
 $ npm run lint          --> run eslint
 $ npm run ios           --> run ionic run ios with livereload and production api
@@ -80,7 +80,7 @@ $ npm run babel-doctor  --> check babel status
 
 ```
 
-##Optional parameters for npm:
+## Optional parameters for npm:
 ```
 --env=prod|dev
 prod: will produce a unique boundle uglified and with revision number for js files.
